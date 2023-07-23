@@ -59,6 +59,10 @@ body {
   animation: circularMotion 5s linear infinite; /* Adjust the duration and timing function as needed */
 }
 
+.opponent-text{
+    font-size: 25px;
+}
+
 @keyframes circularMotion {
   0% {
     transform: translateX(0) translateY(0);
