@@ -3,13 +3,16 @@
   src: url(source/orange\ juice\ 2.0.ttf);
 }
 
-body {
-  font-family: orangeJuice;
+body{
+    background-color: #fafae3;
+    font-family: orangeJuice;
+}
+
+.menu {
   user-select: none;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #fafae3;
   display: flex;
   justify-content: center;
   align-content: center;
@@ -19,6 +22,7 @@ body {
   /* bring your own prefixes */
   transform: translate(-50%, -50%);
 }
+
 .title {
   font-size: 200px;
 }
@@ -89,4 +93,27 @@ body {
 
 .start:active {
   transform: translateY(0px);
+}
+
+#muteAudio{
+    width: 20px;
+    aspect-ratio: 1/1;
+    transition: .6s ease;
+}
+
+#muteAudio:active{
+    transform: translateY(6px);
+}
+
+footer{
+    position: absolute;
+    bottom: 0;
+    width: 99%;
+    height: 2.5rem; 
+}
+
+.footer{
+    display: flex;
+    justify-content: space-between;
+    align-content: flex-end;
 }

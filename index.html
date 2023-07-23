@@ -8,18 +8,41 @@
     <script src="index.js" defer></script>
   </head>
   <body>
-    <div class="title">tic tac toe</div>
-    <div class="center-box">
-      <div class="choose-character" onclick="togglePlayer(0)">
-        <img src="/source/img/humen.png" alt="humen" class="opponent-img" />
-        <div class="opponent-text">player</div>
+    <div class="menu">
+      <div class="title">tic tac toe</div>
+      <div class="center-box">
+        <div class="choose-character" onclick="togglePlayer(0)">
+          <img src="/source/img/humen.png" alt="humen" class="opponent-img" />
+          <div class="opponent-text">player</div>
+        </div>
+        <div class="verses">VS</div>
+        <div class="choose-character" onclick="togglePlayer(1)">
+          <img src="/source/img/humen.png" alt="humen" class="opponent-img" />
+          <div class="opponent-text">player</div>
+        </div>
       </div>
-      <div class="verses">VS</div>
-      <div class="choose-character" onclick="togglePlayer(1)">
-        <img src="/source/img/humen.png" alt="humen" class="opponent-img" />
-        <div class="opponent-text">player</div>
-      </div>
+      <div class="start">Start</div>
     </div>
-    <div class="start">Start</div>
+
+    <footer>
+      <div class="footer">
+        <audio autoplay loop id="backgroundMusic">
+          <source
+            src="source/audio/[non copyright music] massobeats - honey jam (lofi aesthetic music).mp3"
+            type="audio/mpeg"
+          />
+        </audio>
+        <img
+          id="muteAudio"
+          onclick="mute()"
+          src="source/img/unmuted.png"
+          alt="unmuted"
+        />
+        <div class="github">
+          Created by
+          <a href="https://github.com/JeremySalinas">Jeremy Salinas</a>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
