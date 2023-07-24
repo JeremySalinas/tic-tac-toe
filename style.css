@@ -3,12 +3,12 @@
   src: url(source/orange\ juice\ 2.0.ttf);
 }
 
-body{
-    background-color: #fafae3;
-    font-family: orangeJuice;
+body {
+  background-color: #fafae3;
+  font-family: orangeJuice;
 }
 
-.menu {
+#menu {
   user-select: none;
   display: flex;
   flex-direction: column;
@@ -19,7 +19,6 @@ body{
   position: fixed;
   top: 45%;
   left: 50%;
-  /* bring your own prefixes */
   transform: translate(-50%, -50%);
 }
 
@@ -63,8 +62,9 @@ body{
   animation: circularMotion 5s linear infinite; /* Adjust the duration and timing function as needed */
 }
 
-.opponent-text{
-    font-size: 25px;
+.opponent-text {
+  font-size: 25px;
+  text-align: center;
 }
 
 @keyframes circularMotion {
@@ -95,25 +95,116 @@ body{
   transform: translateY(0px);
 }
 
-#muteAudio{
-    width: 20px;
-    aspect-ratio: 1/1;
-    transition: .6s ease;
+#tic-tac-toe{
+  user-select: none;
+  position: fixed;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-#muteAudio:active{
-    transform: translateY(6px);
+.gameMenu{
+  display: flex;
+  align-items: center;
+  gap: 60px;
 }
 
-footer{
-    position: absolute;
-    bottom: 0;
-    width: 99%;
-    height: 2.5rem; 
+.blur{
+  filter: blur(10px);
 }
 
-.footer{
-    display: flex;
-    justify-content: space-between;
-    align-content: flex-end;
+.game{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.turn{
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 35px;
+  border-radius: 7px;
+  width: 160px;
+}
+
+.restart{
+  cursor: pointer;
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 30px;
+  background-color: #f6f6cf;
+  border-radius: 7px;
+  width: 55px;
+  transition: .6s ease;
+}
+
+.restart:hover{
+  transform: scale(1.05);
+  background-color: gray !important;
+}
+
+.restart:active{
+  transform: scale(.95);
+}
+
+
+#squares {
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto auto auto;
+  aspect-ratio: 1/1;
+  width: 450px;
+}
+
+#squares > * {
+  border-radius: 10px;
+  background-color: #f6f6cf;
+  aspect-ratio: 1/1;
+  width: 140px;
+  transition: 0.6s ease;
+}
+
+.square{
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 100px;
+}
+
+.square:hover {
+  background-color: gray !important;
+  transform: scale(1.05);
+}
+
+.winner{
+  font-size:  80px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#muteAudio {
+  width: 20px;
+  aspect-ratio: 1/1;
+  transition: 0.6s ease;
+}
+
+#muteAudio:active {
+  transform: translateY(6px);
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 99%;
+  height: 2.5rem;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-content: flex-end;
 }

@@ -8,7 +8,7 @@
     <script src="index.js" defer></script>
   </head>
   <body>
-    <div class="menu">
+    <div id="menu">
       <div class="title">tic tac toe</div>
       <div class="center-box">
         <div class="choose-character" onclick="togglePlayer(0)">
@@ -21,14 +21,42 @@
           <div class="opponent-text">player</div>
         </div>
       </div>
-      <div class="start">Start</div>
+      <div class="start" onclick="switchScreen()">Start</div>
+    </div>
+
+    <div id="tic-tac-toe" style="display: none;">
+      <div class="gameMenu">
+        <div>
+          <img src="/source/img/humen.png" alt="humen" class="opponent-img" />
+          <div class="opponent-text">player</div>
+        </div>
+          <div class="game">
+            <div class="turn">Player O</div>
+                  <div id="squares">
+            <div class="square" onclick="gameMove(0)"></div>
+            <div class="square" onclick="gameMove(1)""></div>
+            <div class="square" onclick="gameMove(2)"></div>
+            <div class="square" onclick="gameMove(3)"></div>
+            <div class="square" onclick="gameMove(4)"></div>
+            <div class="square" onclick="gameMove(5)"></div>
+            <div class="square" onclick="gameMove(6)"></div>
+            <div class="square" onclick="gameMove(7)"></div>
+            <div class="square" onclick="gameMove(8)"></div>
+                  </div>
+                  <div class="restart" onclick="restart()">↻</div>
+          </div>
+          <div>
+            <img src="/source/img/humen.png" alt="humen" class="opponent-img" />
+            <div class="opponent-text">player</div>
+          </div>
+      </div>
     </div>
 
     <footer>
       <div class="footer">
         <audio autoplay loop id="backgroundMusic">
           <source
-            src="source/audio/[non copyright music] massobeats - honey jam (lofi aesthetic music).mp3"
+            src=""
             type="audio/mpeg"
           />
         </audio>
