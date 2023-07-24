@@ -1,6 +1,7 @@
 const audio = document.getElementById("backgroundMusic");
 audio.volume = 0.05;
 let i = 0;
+var result = 0;
 
 function mute() {
   let audio = document.getElementById("backgroundMusic");
@@ -60,12 +61,16 @@ function checkWin(a, b, c) {
     blur.appendChild(mainMenu);
     mainMenu.style.display = "";
     i = 0;
+    result = 1;
+    console.log("here")
+    return result;
   } else if (i == 9) {
     winner.textContent = "Draw";
     winner.classList.add("winner");
     gameMenu.classList.add("blur");
     blur.appendChild(winner);
   }
+  return result;
 }
 
 function checkSquares(num) {
@@ -158,7 +163,10 @@ function checkSquares(num) {
         document.getElementsByClassName("square")[num - 2].innerHTML
       );
       break;
-  }
+    }
+    if(result == 1){
+      return;
+    }
 }
 
 function gameMove(squareSelected) {
@@ -168,11 +176,17 @@ function gameMove(squareSelected) {
 
   square.textContent = i % 2 === 0 ? "X" : "O";
   i++;
-
+  
   checkSquares(squareSelected);
+  console.log(result)
+  if(result == 1){
+    result = 0;
+    return;
+  }
 
   if (document.getElementsByClassName("opponent-text")[1].innerHTML == "bot") {
     easyBot();
+    console.log("here")
   }
 }
 
