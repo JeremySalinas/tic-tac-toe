@@ -41,10 +41,6 @@ function switchScreen() {
       : "none";
 
   restart();
-
-  if (document.getElementsByClassName("opponent-img")[0].alt == "bot") {
-    easyBot();
-  }
 }
 
 function checkWin(a, b, c) {
@@ -228,6 +224,9 @@ function restart() {
   document.getElementsByClassName("gameMenu")[0].classList.remove("blur");
   document.getElementsByClassName("menuBtn")[0].style.display = "none";
   i = 0;
+  if (document.getElementsByClassName("opponent-img")[0].alt == "bot") {
+    easyBot();
+  }
 }
 
 document
