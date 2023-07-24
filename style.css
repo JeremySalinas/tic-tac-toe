@@ -180,6 +180,7 @@ body {
 }
 
 .winner {
+  text-align: center;
   font-size: 80px;
   width: 400px;
   position: absolute;

@@ -39,7 +39,7 @@ function switchScreen() {
       ? "block"
       : "none";
 
-  restart()
+  restart();
 }
 
 function checkWin(a, b, c) {
@@ -49,27 +49,29 @@ function checkWin(a, b, c) {
   let mainMenu = document.getElementsByClassName("menuBtn")[0];
 
   if (a == b && b == c) {
-    if (
-      document.getElementsByClassName("opponent-text")[1].innerHTML == "bot" && a == "O"
-    ) {
-      winner.textContent = "Bot Won";
-    } else {
-      winner.textContent = "Player Won";
-    }
+    winner.textContent =
+      document.getElementsByClassName("opponent-text")[1].innerHTML === "bot" &&
+      a === "O"
+        ? "Bot Won"
+        : "Player Won";
     gameMenu.classList.add("blur");
     blur.appendChild(winner);
     blur.appendChild(mainMenu);
     mainMenu.style.display = "";
     i = 0;
     result = 1;
-    console.log("here")
     return result;
   } else if (i == 9) {
     winner.textContent = "Draw";
-    winner.classList.add("winner");
     gameMenu.classList.add("blur");
     blur.appendChild(winner);
+    blur.appendChild(mainMenu);
+    mainMenu.style.display = "";
+    i = 0;
+    result = 1;
+    return result;
   }
+
   return result;
 }
 
@@ -163,10 +165,9 @@ function checkSquares(num) {
         document.getElementsByClassName("square")[num - 2].innerHTML
       );
       break;
-    }
-    if(result == 1){
-      return;
-    }
+  }
+
+  if (result == 1) return;
 }
 
 function gameMove(squareSelected) {
@@ -176,17 +177,13 @@ function gameMove(squareSelected) {
 
   square.textContent = i % 2 === 0 ? "X" : "O";
   i++;
-  
+
   checkSquares(squareSelected);
-  console.log(result)
-  if(result == 1){
-    result = 0;
-    return;
-  }
+
+  if (result == 1) return (result = 0);
 
   if (document.getElementsByClassName("opponent-text")[1].innerHTML == "bot") {
     easyBot();
-    console.log("here")
   }
 }
 
@@ -196,11 +193,13 @@ function easyBot() {
 
   if (botMove.innerHTML == "") {
     botMove.textContent = "O";
-    checkSquares(randSpot);
     i++;
+    checkSquares(randSpot);
   } else {
     easyBot();
   }
+
+  if (result == 1) return (result = 0);
 }
 
 function restart() {
@@ -209,9 +208,9 @@ function restart() {
     document.getElementsByClassName("square")[x].textContent = "";
     x++;
   }
-  document.getElementsByClassName("winner")[0].textContent = ""
+  document.getElementsByClassName("winner")[0].textContent = "";
   document.getElementsByClassName("gameMenu")[0].classList.remove("blur");
-  document.getElementsByClassName("menuBtn")[0].style.display = "none"
+  document.getElementsByClassName("menuBtn")[0].style.display = "none";
   i = 0;
 }
 
