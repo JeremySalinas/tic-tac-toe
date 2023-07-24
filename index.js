@@ -20,6 +20,7 @@ const togglePlayer = (playerNumber) => {
     document.getElementsByClassName("opponent-img")[playerNumber];
   let opponentText =
     document.getElementsByClassName("opponent-text")[playerNumber];
+  
 
   opponentSwitchImg.src =
     opponentSwitchImg.alt === "humen"
@@ -40,6 +41,10 @@ function switchScreen() {
       : "none";
 
   restart();
+
+  if (document.getElementsByClassName("opponent-img")[0].alt == "bot") {
+    easyBot();
+  }
 }
 
 function checkWin(a, b, c) {
@@ -49,11 +54,11 @@ function checkWin(a, b, c) {
   let mainMenu = document.getElementsByClassName("menuBtn")[0];
 
   if (a == b && b == c) {
+    console.log(document.getElementsByClassName("opponent-text")[1].innerHTML)
     winner.textContent =
-      document.getElementsByClassName("opponent-text")[1].innerHTML === "bot" &&
-      a === "O"
-        ? "Bot Won"
-        : "Player Won";
+    a === "O"
+        ? document.getElementsByClassName("opponent-text")[1].innerHTML
+        : document.getElementsByClassName("opponent-text")[0].innerHTML;
     gameMenu.classList.add("blur");
     blur.appendChild(winner);
     blur.appendChild(mainMenu);
@@ -182,7 +187,10 @@ function gameMove(squareSelected) {
 
   if (result == 1) return (result = 0);
 
-  if (document.getElementsByClassName("opponent-text")[1].innerHTML == "bot") {
+  if (document.getElementsByClassName("opponent-img")[0].alt == "bot") {
+    easyBot();
+  }
+  if (document.getElementsByClassName("opponent-img")[1].alt == "bot") {
     easyBot();
   }
 }
@@ -190,12 +198,20 @@ function gameMove(squareSelected) {
 function easyBot() {
   let randSpot = Math.floor(Math.random() * 9);
   let botMove = document.getElementsByClassName("square")[randSpot];
+  let xo = i % 2 === 0 ? "X" : "O";
 
   if (botMove.innerHTML == "") {
-    botMove.textContent = "O";
+    botMove.textContent = xo;
     i++;
     checkSquares(randSpot);
   } else {
+    easyBot();
+  }
+
+  if (document.getElementsByClassName("opponent-img")[1].alt == "humen") {
+    if (result == 1) return (result = 0);
+    return;
+  } else{
     easyBot();
   }
 
