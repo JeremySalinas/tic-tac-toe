@@ -26,31 +26,138 @@ const togglePlayer = (playerNumber) => {
       : "source/img/humen.png";
   opponentSwitchImg.alt = opponentSwitchImg.alt === "humen" ? "bot" : "humen";
   opponentText.textContent =
-    opponentSwitchImg.alt === "humen" ? "bot" : "player";
+    opponentSwitchImg.alt === "humen" ? "player" : "bot";
 };
 
 function switchScreen() {
-  document.getElementById("menu").style.display = "none";
+  document.getElementById("menu").style.display =
+    document.getElementById("menu").style.display === "none" ? "" : "none";
 
-  document.getElementById("tic-tac-toe").style.display = "";
+  document.getElementById("tic-tac-toe").style.display =
+    document.getElementById("tic-tac-toe").style.display === "none"
+      ? "block"
+      : "none";
+
+  restart()
 }
 
 function checkWin(a, b, c) {
   let blur = document.getElementById("tic-tac-toe");
-  let winner = document.createElement("div");
+  let winner = document.getElementsByClassName("winner")[0];
   let gameMenu = document.getElementsByClassName("gameMenu")[0];
+  let mainMenu = document.getElementsByClassName("menuBtn")[0];
 
   if (a == b && b == c) {
-    winner.textContent = "Player Won";
-    winner.classList.add("winner");
+    if (
+      document.getElementsByClassName("opponent-text")[1].innerHTML == "bot" && a == "O"
+    ) {
+      winner.textContent = "Bot Won";
+    } else {
+      winner.textContent = "Player Won";
+    }
     gameMenu.classList.add("blur");
     blur.appendChild(winner);
+    blur.appendChild(mainMenu);
+    mainMenu.style.display = "";
     i = 0;
   } else if (i == 9) {
     winner.textContent = "Draw";
     winner.classList.add("winner");
     gameMenu.classList.add("blur");
     blur.appendChild(winner);
+  }
+}
+
+function checkSquares(num) {
+  switch (num) {
+    case 0:
+      checkWin(
+        document.getElementsByClassName("square")[num].innerHTML,
+        document.getElementsByClassName("square")[4].innerHTML,
+        document.getElementsByClassName("square")[8].innerHTML
+      );
+      break;
+    case 2:
+      checkWin(
+        document.getElementsByClassName("square")[num].innerHTML,
+        document.getElementsByClassName("square")[4].innerHTML,
+        document.getElementsByClassName("square")[6].innerHTML
+      );
+      break;
+    case 4:
+      checkWin(
+        document.getElementsByClassName("square")[num].innerHTML,
+        document.getElementsByClassName("square")[0].innerHTML,
+        document.getElementsByClassName("square")[8].innerHTML
+      );
+      checkWin(
+        document.getElementsByClassName("square")[num].innerHTML,
+        document.getElementsByClassName("square")[2].innerHTML,
+        document.getElementsByClassName("square")[6].innerHTML
+      );
+      break;
+    case 6:
+      checkWin(
+        document.getElementsByClassName("square")[num].innerHTML,
+        document.getElementsByClassName("square")[2].innerHTML,
+        document.getElementsByClassName("square")[4].innerHTML
+      );
+      break;
+    case 8:
+      checkWin(
+        document.getElementsByClassName("square")[num].innerHTML,
+        document.getElementsByClassName("square")[0].innerHTML,
+        document.getElementsByClassName("square")[4].innerHTML
+      );
+      break;
+  }
+
+  switch (Math.floor(num / 3)) {
+    case 0:
+      checkWin(
+        document.getElementsByClassName("square")[num].innerHTML,
+        document.getElementsByClassName("square")[num + 3].innerHTML,
+        document.getElementsByClassName("square")[num + 6].innerHTML
+      );
+      break;
+    case 1:
+      checkWin(
+        document.getElementsByClassName("square")[num].innerHTML,
+        document.getElementsByClassName("square")[num - 3].innerHTML,
+        document.getElementsByClassName("square")[num + 3].innerHTML
+      );
+      break;
+    case 2:
+      checkWin(
+        document.getElementsByClassName("square")[num].innerHTML,
+        document.getElementsByClassName("square")[num - 3].innerHTML,
+        document.getElementsByClassName("square")[num - 6].innerHTML
+      );
+      break;
+  }
+
+  switch (Math.floor(num % 3)) {
+    case 0:
+      checkWin(
+        document.getElementsByClassName("square")[num].innerHTML,
+        document.getElementsByClassName("square")[num + 1].innerHTML,
+        document.getElementsByClassName("square")[num + 2].innerHTML
+      );
+      break;
+    case 1:
+      checkWin(
+        document.getElementsByClassName("square")[num].innerHTML,
+        document.getElementsByClassName("square")[num - 1].innerHTML,
+        document.getElementsByClassName("square")[num + 1].innerHTML
+      );
+      break;
+    case 2:
+      checkWin(
+        document.getElementsByClassName("square")[num].innerHTML,
+        document.getElementsByClassName("square")[num - 1].innerHTML,
+        document.getElementsByClassName("square")[num - 2].innerHTML
+      );
+      break;
   }
 }
 
@@ -62,95 +169,23 @@ function gameMove(squareSelected) {
   square.textContent = i % 2 === 0 ? "X" : "O";
   i++;
 
-  switch (squareSelected) {
-    case 0:
-      checkWin(
-        square.innerHTML,
-        document.getElementsByClassName("square")[4].innerHTML,
-        document.getElementsByClassName("square")[8].innerHTML
-      );
-      break;
-    case 2:
-      checkWin(
-        square.innerHTML,
-        document.getElementsByClassName("square")[4].innerHTML,
-        document.getElementsByClassName("square")[6].innerHTML
-      );
-      break;
-    case 4:
-      checkWin(
-        square.innerHTML,
-        document.getElementsByClassName("square")[0].innerHTML,
-        document.getElementsByClassName("square")[8].innerHTML
-      );
-      checkWin(
-        square.innerHTML,
-        document.getElementsByClassName("square")[2].innerHTML,
-        document.getElementsByClassName("square")[6].innerHTML
-      );
-      break;
-    case 6:
-      checkWin(
-        square.innerHTML,
-        document.getElementsByClassName("square")[2].innerHTML,
-        document.getElementsByClassName("square")[4].innerHTML
-      );
-      break;
-    case 8:
-      checkWin(
-        square.innerHTML,
-        document.getElementsByClassName("square")[0].innerHTML,
-        document.getElementsByClassName("square")[4].innerHTML
-      );
-      break;
-  }
+  checkSquares(squareSelected);
 
-  switch (Math.floor(squareSelected / 3)) {
-    case 0:
-      checkWin(
-        square.innerHTML,
-        document.getElementsByClassName("square")[squareSelected + 3].innerHTML,
-        document.getElementsByClassName("square")[squareSelected + 6].innerHTML
-      );
-      break;
-    case 1:
-      checkWin(
-        square.innerHTML,
-        document.getElementsByClassName("square")[squareSelected - 3].innerHTML,
-        document.getElementsByClassName("square")[squareSelected + 3].innerHTML
-      );
-      break;
-    case 2:
-      checkWin(
-        square.innerHTML,
-        document.getElementsByClassName("square")[squareSelected - 3].innerHTML,
-        document.getElementsByClassName("square")[squareSelected - 6].innerHTML
-      );
-      break;
+  if (document.getElementsByClassName("opponent-text")[1].innerHTML == "bot") {
+    easyBot();
   }
+}
 
-  switch (Math.floor(squareSelected % 3)) {
-    case 0:
-      checkWin(
-        square.innerHTML,
-        document.getElementsByClassName("square")[squareSelected + 1].innerHTML,
-        document.getElementsByClassName("square")[squareSelected + 2].innerHTML
-      );
-      break;
-    case 1:
-      checkWin(
-        square.innerHTML,
-        document.getElementsByClassName("square")[squareSelected - 1].innerHTML,
-        document.getElementsByClassName("square")[squareSelected + 1].innerHTML
-      );
-      break;
-    case 2:
-      checkWin(
-        square.innerHTML,
-        document.getElementsByClassName("square")[squareSelected - 1].innerHTML,
-        document.getElementsByClassName("square")[squareSelected - 2].innerHTML
-      );
-      break;
+function easyBot() {
+  let randSpot = Math.floor(Math.random() * 9);
+  let botMove = document.getElementsByClassName("square")[randSpot];
+
+  if (botMove.innerHTML == "") {
+    botMove.textContent = "O";
+    checkSquares(randSpot);
+    i++;
+  } else {
+    easyBot();
   }
 }
 
@@ -160,5 +195,12 @@ function restart() {
     document.getElementsByClassName("square")[x].textContent = "";
     x++;
   }
+  document.getElementsByClassName("winner")[0].textContent = ""
+  document.getElementsByClassName("gameMenu")[0].classList.remove("blur");
+  document.getElementsByClassName("menuBtn")[0].style.display = "none"
   i = 0;
 }
+
+document
+  .getElementsByClassName("menuBtn")[0]
+  .addEventListener("click", () => switchScreen());
