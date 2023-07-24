@@ -20,7 +20,6 @@ const togglePlayer = (playerNumber) => {
     document.getElementsByClassName("opponent-img")[playerNumber];
   let opponentText =
     document.getElementsByClassName("opponent-text")[playerNumber];
-  
 
   opponentSwitchImg.src =
     opponentSwitchImg.alt === "humen"
@@ -39,7 +38,7 @@ function switchScreen() {
     document.getElementById("tic-tac-toe").style.display === "none"
       ? "block"
       : "none";
-
+      document.getElementsByClassName("turn")[0].textContent = document.getElementsByClassName("opponent-text")[0].innerHTML + " X"
   restart();
 }
 
@@ -50,9 +49,8 @@ function checkWin(a, b, c) {
   let mainMenu = document.getElementsByClassName("menuBtn")[0];
 
   if (a == b && b == c) {
-    console.log(document.getElementsByClassName("opponent-text")[1].innerHTML)
     winner.textContent =
-    a === "O"
+      a === "O"
         ? document.getElementsByClassName("opponent-text")[1].innerHTML
         : document.getElementsByClassName("opponent-text")[0].innerHTML;
     gameMenu.classList.add("blur");
@@ -173,6 +171,7 @@ function checkSquares(num) {
 
 function gameMove(squareSelected) {
   const square = document.getElementsByClassName("square")[squareSelected];
+  let playerChange = document.getElementsByClassName("turn")[0];
 
   if (square.innerHTML.includes("X") || square.innerHTML.includes("O")) return;
 
@@ -182,6 +181,9 @@ function gameMove(squareSelected) {
   checkSquares(squareSelected);
 
   if (result == 1) return (result = 0);
+  playerChange.textContent = playerChange.textContent === document.getElementsByClassName("opponent-text")[1].innerHTML + " O"
+      ? document.getElementsByClassName("opponent-text")[0].innerHTML + " X"
+      : document.getElementsByClassName("opponent-text")[1].innerHTML + " O";
 
   if (document.getElementsByClassName("opponent-img")[0].alt == "bot") {
     easyBot();
@@ -189,25 +191,31 @@ function gameMove(squareSelected) {
   if (document.getElementsByClassName("opponent-img")[1].alt == "bot") {
     easyBot();
   }
+
 }
 
 function easyBot() {
   let randSpot = Math.floor(Math.random() * 9);
   let botMove = document.getElementsByClassName("square")[randSpot];
   let xo = i % 2 === 0 ? "X" : "O";
+  let playerChange2 = document.getElementsByClassName("turn")[0];
 
   if (botMove.innerHTML == "") {
     botMove.textContent = xo;
     i++;
     checkSquares(randSpot);
+    playerChange2.textContent = playerChange2.textContent === document.getElementsByClassName("opponent-text")[1].innerHTML + " O"
+    ? document.getElementsByClassName("opponent-text")[0].innerHTML + " X"
+    : document.getElementsByClassName("opponent-text")[1].innerHTML + " O";
   } else {
     easyBot();
   }
 
-  if (document.getElementsByClassName("opponent-img")[1].alt == "humen") {
+  
+  if (document.getElementsByClassName("opponent-img")[0].alt == "humen" || document.getElementsByClassName("opponent-img")[1].alt == "humen") {
     if (result == 1) return (result = 0);
     return;
-  } else{
+  } else {
     easyBot();
   }
 
