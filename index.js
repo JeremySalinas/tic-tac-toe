@@ -10,8 +10,8 @@ function mute() {
 
   audioIcon.src =
     audioIcon.alt === "unmuted"
-      ? "source/img/muted.png"
-      : "source/img/unmuted.png";
+      ? "img/muted.png"
+      : "img/unmuted.png";
   audioIcon.alt = audioIcon.alt === "unmuted" ? "muted" : "unmuted";
 }
 
@@ -23,8 +23,8 @@ const togglePlayer = (playerNumber) => {
 
   opponentSwitchImg.src =
     opponentSwitchImg.alt === "humen"
-      ? "source/img/bot.png"
-      : "source/img/humen.png";
+      ? "img/bot.png"
+      : "img/humen.png";
   opponentSwitchImg.alt = opponentSwitchImg.alt === "humen" ? "bot" : "humen";
   opponentText.textContent =
     opponentSwitchImg.alt === "humen" ? "player" : "bot";
